@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Python Quiz</h1>
+        <form method="POST">
+            {% for i, question in enumerate(questions) %}
+                <div class="question">
+                    <p><strong>Q{{ i+1 }}:</strong> {{ question.question }}</p>
+                    {% for choice in question.choices %}
+                        <label>
+                            <input type="radio" name="question-{{ i }}" value="{{ choice }}" required> {{ choice }}
+                        </label>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

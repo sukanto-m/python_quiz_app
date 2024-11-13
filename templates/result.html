@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Results</h1>
+        <p>You scored {{ score }} out of {{ total }}</p>
+        <h2>Review Your Answers:</h2>
+        <ul>
+            {% for i, question in enumerate(questions) %}
+                <li>
+                    <strong>Q{{ i+1 }}:</strong> {{ question.question }}<br>
+                    <strong>Your Answer:</strong> {{ user_answers[i] }}<br>
+                    {% if user_answers[i] == question.answer %}
+                        <strong style="color: green;">Correct!</strong>
+                    {% else %}
+                        <strong style="color: red;">Incorrect.</strong> The correct answer is {{ question.answer }}
+                    {% endif %}
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('reset') }}">Try Again</a>
+    </div>
+</body>
+</html>
